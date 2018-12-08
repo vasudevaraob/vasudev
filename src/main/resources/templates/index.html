@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout:: head(~{::title}, ~{})">
+  <title th:text="#{home.title} + ' | ' + #{app.title}">首页</title>
+</head>
+<body th:replace="Layout:: body('home', ~{::content} , ~{})">
+	<div th:fragment="content">
+		<div class="jumbotron">
+			<h3 class="display-3" th:text="#{app.title}">Spring Boot Quick Start</h3>
+			<p class="lead" th:text="#{home.jumbotron.lead}">A very famous modern and lightweight architecture based on spring suites, which helps you and your team to build web applications or web services quickly and easily.</p>
+			<hr class="my-3">
+			<p>
+				<span th:text="#{home.jumbotron.p.learning}">From this project, you can learn the knowledges of </span>
+				<a href="http://projects.spring.io/spring-framework/" target="_blank">Spring Framework </a>,
+				<a href="http://projects.spring.io/spring-boot/" target="_blank">Spring Boot </a>,  
+				<a href="http://projects.spring.io/spring-security/" target="_blank">Spring Security </a>,
+				<a href="http://projects.spring.io/spring-data-jpa/" target="_blank">Spring Data JPA </a>,  
+				<a href="http://projects.spring.io/spring-hateoas/" target="_blank">Spring HATEOAS </a>
+				<span th:text="#{home.jumbotron.p.so.on}"></span>
+			</p>
+			<p>
+				<span th:text="#{home.jumbotron.p.intro}">This project introduce the concepts of </span>
+				<a href="http://www.agiledata.org/essays/tdd.html" target="_blank">TDD</a>,
+				<a href="http://www.restfulwebapis.com/" target="_blank">RESTful Web API</a>,
+				<a href="http://openid.net/connect/" target="_blank">OIDC</a>,
+				<a href="https://oauth.net/2/" target="_blank">OAuth2</a> 
+				<span th:text="#{home.jumbotron.p.so.on}"></span>
+			</p>
+		</div>
+		
+		<div class="container">
+			<div class="card my-5">
+				<div class="card-header">
+					<b th:text="#{home.introduction}">Introduction</b>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title" th:text="#{home.introduction.user}">User</h5>
+					<hr class="my-3">
+					<p class="card-text" th:text="#{home.introduction.user.p.user}">username: user, password: user, roles: USER</p>
+					<p class="card-text" th:text="#{home.introduction.user.p.admin}">username: admin, password: admin, roles: USER, ADMIN</p>
+					
+					<h5 class="card-title mt-5" th:text="#{home.introduction.sys}">System Access Control</h5>
+					<hr class="my-3">
+					<p class="card-text" th:text="#{home.introduction.sys.p.anonymous}">Anonymous can access home page, login page.</p>
+					<p class="card-text" th:text="#{home.introduction.sys.p.user}">User can access all page but can't access system maintain APIs</p>
+					<p class="card-text" th:text="#{home.introduction.sys.p.admin}">Admin can acces all pages</p>
+					
+					<h5 class="card-title mt-5" th:text="#{home.introduction.api}">Custom API Access Control</h5>
+					<hr class="my-3">
+					<p class="card-text" th:text="#{home.introduction.api.p.anonymous}">Anonymous can not access any APIs</p>
+					<p class="card-text" th:text="#{home.introduction.api.p.user}">User can only retrieve(GET) service source from custom APIs</p>
+					<p class="card-text" th:text="#{home.introduction.api.p.admin}">Admin can GET POST PUT DELETE service source from/to custom APIs</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

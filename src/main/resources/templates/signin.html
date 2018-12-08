@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout:: head(~{::title}, ~{})">
+  <title th:text="#{signin.title} + ' | ' + #{app.title}">Signin</title>
+</head>
+<body th:replace="Layout:: body('home', ~{::content} , ~{})">
+	<div th:fragment="content" class="container my-t py-5">
+		<div class="card mt-5">
+			<div class="card-header text-center">
+				<b th:text="#{signin.please}">Please signin</b>
+			</div>
+			
+			<div class="card-body" id="sysapi">
+				<form th:action="@{/signin}" th:method="post">
+					<div class="alert alert-danger" th:if="${param.error != null && session.SPRING_SECURITY_LAST_EXCEPTION != null}">
+						<p th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}" class="mb-0">Login Error</p>
+					</div>
+					<div class="form-group">
+						<label for="username" th:text="#{user.name}">User Name</label>
+						<input type="text" class="form-control form-control-lg" id="username" name="username" th:placeholder="#{user.name.placeholder}" required>
+						<small class="form-text text-muted" th:text="#{user.name.help}"></small>
+					</div>
+					<div class="form-group">
+						<label for="password" th:text="#{user.password}">Password</label>
+						<input type="password" class="form-control form-control-lg" id="password" name="password"  th:placeholder="#{user.password.placeholder}" required>
+						<small class="form-text text-muted" th:text="#{user.password.help}"></small>
+					</div>
+					<button type="submit" class="btn btn-primary" th:text="#{signin.submit}">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

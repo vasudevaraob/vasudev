@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout:: head(~{::title}, ~{})">
+  <title th:text="APIs + ' | ' + #{app.title}">APIs</title>
+</head>
+<body th:replace="Layout:: body('webapi', ~{::content} , ~{::script})">
+	<div th:fragment="content" class="container mt-5">
+		<div class="card">
+			<div class="card-header">
+				<b th:text="#{api.sys}">System APIs</b>
+			</div>
+			
+			<div class="card-body" id="sysapi">
+				
+			</div>
+		</div>
+		
+		<div class="card my-5">
+			<div class="card-header">
+				<b th:text="#{api.custom}">Custom APIs</b>
+			</div>
+			
+			<div class="card-body">
+				<ul>
+					<li>
+						Author(Create a author)
+						<ul>
+							<li>
+								Http Method: <span class="text-danger">POST</span><br>
+								Request Body: <span class="text-danger">Author newAuthor</span><br>
+								Link: <span class="text-danger">http://localhost[(@{/api/authors})]</span>
+							</li>
+						</ul>
+						Author(Get author information)
+						<ul>
+							<li>
+								Http Method: <span class="text-danger">GET</span><br>
+								Link: <span class="text-danger">http://localhost[(@{/api/authors})]/{AUTHOR_ID}</span>
+							</li>
+						</ul>
+						Author(Delete a author)
+						<ul>
+							<li>
+								Http Method: <span class="text-danger">DELETE</span><br>
+								Link: <span class="text-danger">http://localhost[(@{/api/authors})]/{AUTHOR_ID}</span>
+							</li>
+						</ul>
+						Author(Assign a book)
+						<ul>
+							<li>
+								Http Method: <span class="text-danger">PUT</span><br>
+								Request Body: <span class="text-danger">Book existBook</span><br>
+								Link: <span class="text-danger">http://localhost[(@{/api/authors})]/{AUTHOR_ID}/books</span>
+							</li>
+						</ul>
+						
+					</li>
+					<li>
+						Book(Create a book)
+						<ul>
+							<li>
+								Http Method: <span class="text-danger">POST</span><br>
+								Request Body: <span class="text-danger">Book newBook</span><br>
+								Link: <span class="text-danger">http://localhost[(@{/api/books})]</span>
+							</li>
+						</ul>
+						Book(Get book information)
+						<ul>
+							<li>
+								Http Method: <span class="text-danger">GET</span><br>
+								Link: <span class="text-danger">http://localhost[(@{/api/books})]/{BOOK_ID}</span>
+							</li>
+						</ul>
+						Book(Delete a book)
+						<ul>
+							<li>
+								Http Method: <span class="text-danger">DELETE</span><br>
+								Link: <span class="text-danger">http://localhost[(@{/api/books})]/{BOOK_ID}</span>
+							</li>
+						</ul>
+						Book(Assign a author)
+						<ul>
+							<li>
+								Http Method: <span class="text-danger">PUT</span><br>
+								Request Body: <span class="text-danger">Author existAuthor</span><br>
+								Link: <span class="text-danger">http://localhost[(@{/api/books})]/{BOOK_ID}/authors</span>
+							</li>
+						</ul>
+						
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<script th:inline="javascript">
+		$.get('[(@{/actuator})]', function(data){
+			if(data && data.links){
+				console.log(data);
+				var html = '<ul>';
+				for(var i = 0; i< data.links.length; i++){
+					html += '<li><span>' + data.links[i].rel + '</span><br><a href='+data.links[i].href+ '>' + data.links[i].href + '</a></li>';
+				}
+				html +='</ul>';
+				
+				$('#sysapi').html(html);
+			}else{
+				$('#sysapi').html('No content');
+			}
+			
+		});
+	</script>
+</body>
+</html>
